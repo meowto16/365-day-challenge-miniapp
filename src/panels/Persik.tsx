@@ -1,9 +1,9 @@
-import React, {MouseEventHandler} from 'react';
+import React, { MouseEventHandler } from 'react'
 
-import { Panel, PanelHeader, PanelHeaderBack } from '@vkontakte/vkui';
+import { Panel, PanelHeader, PanelHeaderBack } from '@vkontakte/vkui'
 
-import persik from '../img/persik.png';
-import './Persik.css';
+import persik from '../img/persik.png'
+import './Persik.css'
 
 interface PersikProps {
 	id: string;
@@ -11,12 +11,12 @@ interface PersikProps {
 }
 
 const Persik: React.FC<PersikProps> = ({ id, go }) => (
-	<Panel id={id}>
-		<PanelHeader left={<PanelHeaderBack onClick={go} data-to="home"/>}>
+  <Panel id={id}>
+    <PanelHeader left={<PanelHeaderBack onClick={go} data-to="home"/>}>
 			Persik
-		</PanelHeader>
-		<img className="Persik" src={persik} alt="Persik The Cat"/>
-	</Panel>
-);
+    </PanelHeader>
+    <img className="Persik" src={persik} alt="Persik The Cat"/>
+  </Panel>
+)
 
-export default Persik;
+export default Persik
