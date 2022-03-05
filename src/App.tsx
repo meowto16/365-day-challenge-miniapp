@@ -1,37 +1,33 @@
 import React from 'react'
 import {
-  View,
   AppRoot,
   useAdaptivity,
   PanelHeader,
   SplitLayout,
   SplitCol,
-  Panel,
-  ViewWidth,
-  Group,
-  SimpleCell,
-  Header
+  ViewWidth, ConfigProvider, useAppearance
 } from '@vkontakte/vkui'
 import '@vkontakte/vkui/dist/vkui.css'
+import ScreenContext from 'screens/Screen.context'
+import Screen from './screens/Screen'
+import Navigation from 'screens/components/Navigation'
 
 const App = () => {
   const { viewWidth } = useAdaptivity()
+  const appearance = useAppearance()
 
   return (
     <AppRoot>
-      <SplitLayout header={<PanelHeader separator={false} />}>
-        <SplitCol spaced={viewWidth && viewWidth > ViewWidth.MOBILE}>
-          <View activePanel="main">
-            <Panel id="main">
-              <PanelHeader>VKUI</PanelHeader>
-              <Group header={<Header mode="secondary">Items</Header>}>
-                <SimpleCell>Hello</SimpleCell>
-                <SimpleCell>World</SimpleCell>
-              </Group>
-            </Panel>
-          </View>
-        </SplitCol>
-      </SplitLayout>
+      <ConfigProvider appearance={appearance}>
+        <SplitLayout header={<PanelHeader separator={false} />}>
+          <SplitCol spaced={viewWidth && viewWidth > ViewWidth.MOBILE}>
+            <ScreenContext>
+              <Screen />
+              <Navigation />
+            </ScreenContext>
+          </SplitCol>
+        </SplitLayout>
+      </ConfigProvider>
     </AppRoot>
   )
 }
