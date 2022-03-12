@@ -1,11 +1,14 @@
 import React from 'react'
 import {
   AppRoot,
-  useAdaptivity,
+  ConfigProvider,
   PanelHeader,
-  SplitLayout,
   SplitCol,
-  ViewWidth, ConfigProvider, useAppearance
+  SplitLayout,
+  useAdaptivity,
+  useAppearance,
+  ViewWidth,
+  WebviewType
 } from '@vkontakte/vkui'
 import '@vkontakte/vkui/dist/vkui.css'
 import ScreenContext from 'screens/Screen.context'
@@ -18,7 +21,7 @@ const App = () => {
 
   return (
     <AppRoot>
-      <ConfigProvider appearance={appearance}>
+      <ConfigProvider appearance={appearance} webviewType={WebviewType.VKAPPS}>
         <SplitLayout header={<PanelHeader separator={false} />}>
           <SplitCol spaced={viewWidth && viewWidth > ViewWidth.MOBILE}>
             <ScreenContext>
