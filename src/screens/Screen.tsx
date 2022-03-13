@@ -1,10 +1,12 @@
 import React from 'react'
-import { Panel, View } from '@vkontakte/vkui'
+import { View, Panel } from '@vkontakte/vkui'
 
 import ProfilePanel from './panels/Profile.panel'
 import ChallengersPanel from './panels/Challengers.panel'
 import SettingsPanel from './panels/Settings.panel'
+
 import { useScreenContext } from './Screen.context'
+
 import PanelEnum from './enum/Panel.enum'
 
 const Screen = () => {
