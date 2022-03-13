@@ -6,7 +6,6 @@ import {
   SplitCol,
   SplitLayout,
   useAdaptivity,
-  useAppearance,
   ViewWidth,
   WebviewType
 } from '@vkontakte/vkui'
@@ -18,11 +17,10 @@ import AppErrorBoundary from './components/Error/AppErrorBoundary'
 
 const App = () => {
   const { viewWidth } = useAdaptivity()
-  const appearance = useAppearance()
 
   return (
     <AppRoot>
-      <ConfigProvider appearance={appearance} webviewType={WebviewType.VKAPPS}>
+      <ConfigProvider appearance="light" webviewType={WebviewType.VKAPPS}>
         <AppErrorBoundary>
           <SplitLayout header={<PanelHeader separator={false} />}>
             <SplitCol spaced={viewWidth && viewWidth > ViewWidth.MOBILE}>

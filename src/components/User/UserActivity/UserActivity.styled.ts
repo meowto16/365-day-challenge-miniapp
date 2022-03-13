@@ -87,13 +87,12 @@ export const ActivityLines = styled.div`
     display: block;
     width: 20px;
     height: 8px;
-    transform: translateY(-15px);
     background: white;
 
   }
 
   [data-popper-placement="top"] .Tooltip__corner::after {
-    transform: translateY(15px);
+    transform: translateY(-15px);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
   }
