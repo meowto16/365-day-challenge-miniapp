@@ -1,79 +1,64 @@
-import React from 'react'
+import React, { useCallback } from 'react'
+
 import {
   Group,
   Header,
   Panel,
   PanelHeader,
-  PullToRefresh,
-  Banner,
-  Button, RichCell, Avatar, HorizontalCell, InitialsAvatar, InitialsAvatarProps, HorizontalScroll, Caption
+  PullToRefresh
 } from '@vkontakte/vkui'
+
+
+import UserInfo from '../../components/User/UserInfo/UserInfo'
+import UserStats from '../../components/User/UserStats'
+import UserActivity from 'components/User/UserActivity'
+import AchievementsBanner
+  from '../../components/Banner/AchievementsBanner'
 
 import PanelEnum from '../enum/Panel.enum'
 import useRefreshProfile from '../../hooks/useRefreshProfile'
 
-const MOCKED_STATS: { id: number; value: number; desc: React.ReactElement; gradientColor: InitialsAvatarProps['gradientColor']}[] = [
-  { id: 1, value: 71, desc: <>Текущий стрик</>, gradientColor: 'green' },
-  { id: 2, value: 6.82, desc: <>В среднем за день</>, gradientColor: 'violet' },
-  { id: 3, value: 484, desc: <>Всего контрибьютов</>, gradientColor: 'blue' },
-  { id: 4, value: 0, desc: <>Дней пропущено</>, gradientColor: 'red' },
-]
-
 const ProfilePanel: React.VFC = () => {
   const { handleRefresh, isRefreshing } = useRefreshProfile()
+
+  const handleAchievementsBannerClick = useCallback(() => {
+    console.log('Achievements more click')
+  }, [])
 
   return (
     <Panel id={PanelEnum.PROFILE}>
       <PanelHeader>Профиль</PanelHeader>
       <PullToRefresh onRefresh={handleRefresh} isFetching={isRefreshing}>
         <Group separator="hide">
-          <RichCell 
-            disabled 
-            multiline 
-            before={<Avatar size={72} src="/images/mocked-avatar.jpeg" />}
-            text="Frontend разработчик"
-            caption="VK (VKO-1)"
-          >
-              Киршин Максим
-          </RichCell>
+          <UserInfo
+            name="Киршин Максим"
+            workAt="VK (VKO-1)"
+            profession="Frontend-разработчик"
+            avatar="/images/mocked-avatar.jpeg"
+          />
         </Group>
         <Group separator="hide">
           <Header mode="secondary">Статистика</Header>
-          <HorizontalScroll>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(95px, 130px))', textAlign: 'center' }}>
-              {MOCKED_STATS.map(stat => (
-                <HorizontalCell size="m" key={stat.id} disabled>
-                  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', paddingRight: '16px' }}>
-                    <InitialsAvatar size={56} gradientColor={stat.gradientColor} style={{ margin: '0 auto' }}>
-                      {stat.value}
-                    </InitialsAvatar>
-                    <Caption weight="regular" level="2" style={{ marginTop: '12px' }}>{stat.desc}</Caption>
-                  </div>
-                </HorizontalCell>
-              ))}
-            </div>
-          </HorizontalScroll>
+          <UserStats currentStreak={72} averageContributes={6.82} totalContributes={482} daysMissed={0} />
         </Group>
-        <Group>
+        <Group separator="hide">
           <Header mode="secondary">Прогресс</Header>
-        </Group>
-        <Group>
-          <Banner
-            mode="image"
-            header="Мои достижения"
-            subheader="Разблокировано 9 из 36"
-            background={
-              <div
-                style={{
-                  backgroundColor: '#65c063',
-                  backgroundImage: 'url(/images/achievements-image.jpeg)',
-                  backgroundPosition: 'right bottom',
-                  backgroundSize: 320,
-                  backgroundRepeat: 'no-repeat',
-                }}
-              />
-            }
-            actions={<Button mode="overlay_primary">Подробнее</Button>}
+          <UserActivity contributes={[
+            { date: new Date('2022/03/13'), contributesCount: 4 },
+            { date: new Date('2022/03/14'), contributesCount: 2 },
+            { date: new Date('2022/03/15'), contributesCount: 1 },
+            { date: new Date('2022/03/16'), contributesCount: 12 },
+            { date: new Date('2022/03/17'), contributesCount: 5 },
+            { date: new Date('2022/03/18'), contributesCount: 4 },
+            { date: new Date('2022/03/19'), contributesCount: 7 },
+            { date: new Date('2022/03/20'), contributesCount: 20 },
+            { date: new Date('2022/03/21'), contributesCount: 36 },
+          ]} />
+          <AchievementsBanner
+            title="Мои достижения"
+            totalAchievementsCount={36}
+            unlockedAchievementsCount={9}
+            onClick={handleAchievementsBannerClick}
           />
         </Group>
       </PullToRefresh>

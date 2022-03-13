@@ -6,4 +6,4 @@ import App from './App'
 bridge.send('VKWebAppInit')
 
 render(<App />, document.getElementById('root'))
-process.env.NODE_ENV === 'development' && import('./eruda')
+process.env.NODE_ENV === 'development' && import('./eruda-initializer')
