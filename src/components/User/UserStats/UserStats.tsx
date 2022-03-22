@@ -4,7 +4,7 @@ import {
   HorizontalScroll, InitialsAvatarProps
 } from '@vkontakte/vkui'
 
-import * as S from './UserStats.styled'
+import * as StyledVariants from './UserStats.styled'
 import CountUp from 'react-countup'
 
 type UserStatsItem = {
@@ -19,14 +19,20 @@ export interface UserStatsProps {
   averageContributes: number
   totalContributes: number
   daysMissed: number
+  variant?: 'horizontal' | 'minified'
 }
 
 const UserStats: React.VFC<UserStatsProps> = ({
   currentStreak,
   averageContributes,
   totalContributes,
-  daysMissed
+  daysMissed,
+  variant = 'horizontal'
 }) => {
+  const S = useMemo(() => {
+    return StyledVariants[variant]
+  }, [variant])
+
   const stats: UserStatsItem[] = useMemo(() => {
     return [
       { id: 'current-streak', value: currentStreak, desc: <>Текущий стрик</>, gradientColor: 'green' },
@@ -46,7 +52,7 @@ const UserStats: React.VFC<UserStatsProps> = ({
                 <CountUp
                   decimals={`${stat.value}`.split('.')[1]?.length || 0}
                   end={stat.value}
-                  duration={2}
+                  duration={1}
                 />
               </S.StatsValue>
               <S.StatsCaption weight="regular" level="2">

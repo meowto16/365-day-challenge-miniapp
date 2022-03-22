@@ -12,7 +12,7 @@ const ScreenContext = createContext<ScreenContextValue>({
 })
 
 const ScreenContextProvider: FC = ({ children }) => {
-  const [activeScreen, goToScreen] = useState<PanelEnum>(PanelEnum.PROFILE)
+  const [activeScreen, goToScreen] = useState<PanelEnum>(PanelEnum.CHALLENGERS)
 
   return (
     <ScreenContext.Provider value={{ activeScreen, goToScreen }}>
